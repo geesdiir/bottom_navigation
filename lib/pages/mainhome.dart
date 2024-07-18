@@ -1,40 +1,40 @@
+import 'package:bottom_navigation/pages/home.dart';
+import 'package:bottom_navigation/pages/profile.dart';
+import 'package:bottom_navigation/pages/setting.dart';
 import 'package:flutter/material.dart';
 
 class MainHome extends StatefulWidget {
-  const MainHome({super.key});
+  MainHome({super.key});
 
   @override
   State<MainHome> createState() => _MainHomeState();
 }
 
 class _MainHomeState extends State<MainHome> {
-  int myIndex = 0;
+  int _selectedIndex = 0;
+
+  void _navigateBottomBar(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List _pages = [HomePage(), SettingPage(), ProfilePage()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Page"),
-        backgroundColor: Colors.blue,
+        title: const Text("Mian Home Page"),
+        backgroundColor: const Color(0xFF4C56AF),
       ),
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        type: BottomNavigationBarType.shifting,
-        onTap: (index) {
-          setState(() {
-            myIndex = index;
-            Navigator.pushNamed(context, '/SettingPage');
-          });
-        },
+        currentIndex: _selectedIndex,
+        onTap: _navigateBottomBar,
         items: const [
-          // home
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home",
-              backgroundColor: Color.fromRGBO(109, 46, 42, 1)),
-          // setting
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting"),
-
-          // profile
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
         ],
       ),
