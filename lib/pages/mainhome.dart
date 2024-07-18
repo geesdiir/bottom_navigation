@@ -19,7 +19,7 @@ class _MainHomeState extends State<MainHome> {
     });
   }
 
-  final List _pages = [HomePage(), SettingPage(), ProfilePage()];
+  final List _pages = const [HomePage(), SettingPage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
